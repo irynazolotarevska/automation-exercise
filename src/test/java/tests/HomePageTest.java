@@ -2,16 +2,25 @@ package tests;
 
 
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import pages.HomePage;
+import pages.SignupLoginPage;
 
 public class HomePageTest extends BaseTest{
+    HomePage homePage;
+    SignupLoginPage signupPage;
 
-    private static final String STARTURL = "https://automationexercise.com/";
+    @BeforeMethod
+    public void setupPage(){
+        homePage = new HomePage(page);
+        signupPage = new SignupLoginPage(page);
+    }
 
-    @Test()
+    @Test
     public void verifyHomePageTitle(){
 
-        page.navigate(STARTURL);
+        homePage.openHomePage();
         String actualTitle = page.title();
         String expectedTitle = "Automation Exercise";
         Assert.assertEquals(actualTitle, expectedTitle);
@@ -20,17 +29,24 @@ public class HomePageTest extends BaseTest{
 
     @Test
     public void verifyHomePageUrl(){
-        page.navigate(STARTURL);
-        Assert.assertTrue(page.url().contains(STARTURL));
+        homePage.openHomePage();
+        Assert.assertTrue(page.url().contains(HomePage.STARTURL));
         System.out.println("✓ Test passed!");
     }
 
     @Test
     public void verifyLogoIsVisible(){
-        page.navigate(STARTURL);
-        boolean isLogoVisible = page.locator("img[alt='Website for automation practice']").isVisible();
-        Assert.assertTrue(isLogoVisible, "Logo should be visible!");
+        homePage.openHomePage() ;
+        Assert.assertTrue(homePage.isLogoVisible(), "Logo should be visible!");
         System.out.println("✓ Test passed!");
     }
+
+    @Test
+    public void verifyUserCanNavigateToSignupPage(){
+        homePage.openHomePage();
+        homePage.clickSignupLogin();
+        Assert.assertTrue(page.url().contains("/login"));
+    }
+
 
 }

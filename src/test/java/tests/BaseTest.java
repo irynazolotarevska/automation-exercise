@@ -18,7 +18,6 @@ public class BaseTest {
        browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
        context = browser.newContext();
        page = context.newPage();
-
        System.out.println("Browser started successfully");
     }
 
