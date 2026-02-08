@@ -31,8 +31,8 @@ public class SignupLoginPage {
     }
 
     public void signUp(String name, String email){
-        page.locator(nameInput).fill(name);
-        page.locator(emailAddressSignup).fill(email);
-        page.locator(signupButton).click();
+        enterName(name);
+        enterEmail(email);
+        clickSignupButton();
     }
 }

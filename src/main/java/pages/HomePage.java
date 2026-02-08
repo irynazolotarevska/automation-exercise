@@ -8,7 +8,8 @@ public class HomePage {
     public static final String STARTURL = "https://automationexercise.com/";
     private String logo = "img[alt='Website for automation practice']";
     private String signupLoginButton = "a:has-text('Signup / Login')";
-
+    private String loggedInText = "Logged in as ";
+    private String deleteAccountButton = "Delete Account";
 
     public HomePage(Page page){
         this.page = page;
@@ -29,9 +30,13 @@ public class HomePage {
     public boolean isLogoVisible(){
       return page.locator(logo).isVisible();
     }
-
     public void clickSignupLogin(){
         page.locator(signupLoginButton).click();
     }
-
+    public boolean isLoggedInTextVisible(String username){
+        return page.getByText(loggedInText + username).isVisible();
+    }
+    public void clickDeleteAccountButton(){
+        page.locator(deleteAccountButton).click();
+    }
 }
