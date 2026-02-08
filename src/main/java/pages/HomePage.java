@@ -37,6 +37,6 @@ public class HomePage {
         return page.getByText(loggedInText + username).isVisible();
     }
     public void clickDeleteAccountButton(){
-        page.locator(deleteAccountButton).click();
+        page.getByText(deleteAccountButton).click();
     }
 }
