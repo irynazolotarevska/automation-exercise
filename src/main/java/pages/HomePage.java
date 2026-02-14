@@ -1,6 +1,8 @@
 package pages;
 
+import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.options.WaitForSelectorState;
 
 public class HomePage {
 
@@ -28,12 +30,15 @@ public class HomePage {
     }
 
     public boolean isLogoVisible(){
-      return page.locator(logo).isVisible();
+        page.locator(logo).waitFor();
+        return page.locator(logo).isVisible();
     }
     public void clickSignupLogin(){
+        page.locator(signupLoginButton).waitFor(new Locator.WaitForOptions().setTimeout(5000));
         page.locator(signupLoginButton).click();
     }
     public boolean isLoggedInTextVisible(String username){
+        page.getByText(loggedInText + username).waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.VISIBLE));
         return page.getByText(loggedInText + username).isVisible();
     }
     public void clickDeleteAccountButton(){

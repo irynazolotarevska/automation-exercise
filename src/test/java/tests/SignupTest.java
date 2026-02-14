@@ -24,7 +24,7 @@ public class SignupTest extends BaseTest {
         accountDeleted = new AccountCreatedDeleted(page);
     }
 
-    @Test
+    @Test(invocationCount = 10)
     public void completeSignUpFlow(){
         homePage.openHomePage();
         homePage.clickSignupLogin();

@@ -30,8 +30,9 @@ public class AccountInformationPage {
     private String createAccountButton = "button[data-qa='create-account']";
 
     public AccountInformationPage(Page page) { this.page = page; }
-    /* Enter Account Infoormation */
+    /* Enter Account Information */
     public boolean isAccountInformationHeaderVisible() {
+        page.locator(headerText1).waitFor();
         return page.locator(headerText1).isVisible();
     }
     public void selectTitleMrs(){
@@ -54,6 +55,7 @@ public class AccountInformationPage {
 
     /* Address Information */
     public boolean isAddressInformationHeader2Visible(){
+        page.locator(headerText2).waitFor();
         return page.locator(headerText2).isVisible();
     }
     public void fillFirstName(String firstName) {

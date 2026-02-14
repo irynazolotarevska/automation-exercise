@@ -1,6 +1,8 @@
 package pages;
 
+import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.options.WaitForSelectorState;
 
 public class AccountCreatedDeleted {
     private Page page;
@@ -13,6 +15,7 @@ public class AccountCreatedDeleted {
     }
 
     public boolean isHeaderVisible() {
+      page.locator(header).waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.VISIBLE));
        return page.locator(header).isVisible();
     }
     public void clickContinue(){
