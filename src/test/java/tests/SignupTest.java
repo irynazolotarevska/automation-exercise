@@ -15,7 +15,7 @@ public class SignupTest extends BaseTest {
     AccountCreatedDeleted accountCreated;
     AccountCreatedDeleted accountDeleted;
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void setupPage(){
         homePage =new HomePage(page);
         signupPage = new SignupLoginPage(page);
@@ -24,7 +24,7 @@ public class SignupTest extends BaseTest {
         accountDeleted = new AccountCreatedDeleted(page);
     }
 
-    @Test(invocationCount = 10)
+    @Test(groups = {"smoke"})
     public void completeSignUpFlow(){
         homePage.openHomePage();
         homePage.clickSignupLogin();

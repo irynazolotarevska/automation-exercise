@@ -19,12 +19,13 @@ public class ConfigReader {
         }
     }
 
-    public static  String getProperty(String key){
-        return properties.getProperty(key);
-    }
 
     public static int getTimeout(){
         return Integer.parseInt(properties.getProperty("default.timeout"));
+    }
+
+    public static String getExistingUserEmail(){
+        return properties.getProperty("existing.user.email");
     }
 
 

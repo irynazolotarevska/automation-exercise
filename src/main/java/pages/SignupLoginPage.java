@@ -11,11 +11,13 @@ public class SignupLoginPage {
     private String emailAddressLogin = "input[data-qa='login-email']";
     private String passwordLocator = "input[placeholder='Password']";
     private String loginButton = "button[data-qa='login-button']";
+    private String validationErrorLogInMessage = "Your email or password is incorrect!";
 
     /* SignUp section */
     private String nameInput = "input[placeholder='Name']";
     private String emailAddressSignup = "input[data-qa='signup-email']";
     private String signupButton = "button[data-qa='signup-button']";
+
 
     public SignupLoginPage(Page page) { this.page = page; }
 
@@ -32,6 +34,9 @@ public class SignupLoginPage {
     }
     public void clickLoginButton(){
         page.locator(loginButton).click();
+    }
+    public boolean isErrorMessageVisible(){
+       return page.getByText(validationErrorLogInMessage).isVisible();
     }
 
     /* SignUp Section */
@@ -56,5 +61,6 @@ public class SignupLoginPage {
         enterEmail(email);
         clickSignupButton();
     }
+
 
 }

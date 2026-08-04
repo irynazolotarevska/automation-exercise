@@ -20,12 +20,10 @@ public class HomePage {
     public void openHomePage() {
         page.navigate(STARTURL);
 
-        /* google popup*/
-
-        try {
-            page.locator("p:has-text('Погоджуюся')").click();
-        } catch (Exception e) {
-            // Ignore if popup absent
+        /* consent popup - not always present, so don't wait for it */
+        Locator consentPopup = page.locator("p.fc-button-label:text-is('Consent')");
+        if (consentPopup.count() > 0 && consentPopup.isVisible()) {
+            consentPopup.click();
         }
     }
 

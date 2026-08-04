@@ -12,7 +12,7 @@ public class BaseTest {
     protected BrowserContext context;
     protected Page page;
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void setup() {
 
        playwright = Playwright.create();
@@ -23,7 +23,7 @@ public class BaseTest {
        System.out.println("Browser started successfully");
     }
 
-    @AfterMethod
+    @AfterMethod(alwaysRun = true)
     public void teardown(){
         if (page != null) {
             page.close();
