@@ -1,5 +1,6 @@
 package pages;
 
+import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 
 public class SignupLoginPage {
@@ -8,32 +9,39 @@ public class SignupLoginPage {
 
     /* Login section */
     private String titleLoginToYourAccount = "Login to your account";
-    private String emailAddressLogin = "input[data-qa='login-email']";
+    private Locator emailAddressLogin;
     private String passwordLocator = "input[placeholder='Password']";
-    private String loginButton = "button[data-qa='login-button']";
+    private Locator loginButton;
     private String validationErrorLogInMessage = "Your email or password is incorrect!";
 
     /* SignUp section */
     private String nameInput = "input[placeholder='Name']";
-    private String emailAddressSignup = "input[data-qa='signup-email']";
-    private String signupButton = "button[data-qa='signup-button']";
+    private Locator emailAddressSignup;
+    private Locator signupButton;
 
 
-    public SignupLoginPage(Page page) { this.page = page; }
+    public SignupLoginPage(Page page) {
+        this.page = page;
+        emailAddressLogin = page.getByTestId("login-email");
+        loginButton = page.getByTestId("login-button");
+        emailAddressSignup = page.getByTestId("signup-email");
+        signupButton = page.getByTestId("signup-button");
+    }
+
 
     /* Login section */
-    public boolean isTitleLoginToAcoountVisible(){
+    public boolean isTitleLoginToAcountVisible(){
         page.getByText(titleLoginToYourAccount).waitFor();
        return page.getByText(titleLoginToYourAccount).isVisible();
     }
     public void enterEmailForLogin(String email){
-        page.locator(emailAddressLogin).fill(email);
+        emailAddressLogin.fill(email);
     }
     public void enterPassword(String password){
         page.locator(passwordLocator).fill(password);
     }
     public void clickLoginButton(){
-        page.locator(loginButton).click();
+        loginButton.click();
     }
     public boolean isErrorMessageVisible(){
        return page.getByText(validationErrorLogInMessage).isVisible();
@@ -44,10 +52,10 @@ public class SignupLoginPage {
         page.locator(nameInput).fill(name);
     }
     public void enterEmail(String email){
-        page.locator(emailAddressSignup).fill(email);
+        emailAddressSignup.fill(email);
     }
     public void clickSignupButton(){
-        page.locator(signupButton).click();
+        signupButton.click();
     }
 
     public void login(String email, String password) {

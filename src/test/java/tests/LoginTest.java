@@ -34,7 +34,7 @@ public class LoginTest extends BaseTest {
         homePage.openHomePage();
         Assert.assertTrue(homePage.isLogoVisible());
         homePage.clickSignupLogin();
-        Assert.assertTrue(signupLoginPage.isTitleLoginToAcoountVisible());
+        Assert.assertTrue(signupLoginPage.isTitleLoginToAcountVisible());
         signupLoginPage.login(ConfigReader.getExistingUserEmail(),"123456");
         Assert.assertTrue(homePage.isLoggedInTextVisible("AutoTest"));
     }

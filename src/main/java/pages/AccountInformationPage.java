@@ -1,12 +1,14 @@
 package pages;
 
+import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.options.AriaRole;
 
 public class AccountInformationPage {
     private Page page;
 
     /* Enter Account Infoormation */
-    private String headerText1 = "//b[normalize-space()='Enter Account Information']";
+    private Locator headerText1;
     private String titleMrs = "#id_gender2";
     private String passwordField = "#password";
     private String dayOfBirth = "#days";
@@ -16,7 +18,7 @@ public class AccountInformationPage {
     private String receiveSpecialOffers = "#optin";
 
     /* Address Information */
-    private String headerText2 = "//b[normalize-space()='Address Information']";
+    private Locator headerText2;
     private String firstNameField = "#first_name";
     private String lastNameField = "#last_name";
     private String companyField = "#company";
@@ -27,13 +29,18 @@ public class AccountInformationPage {
     private String cityField = "#city";
     private String zipcodeField = "#zipcode";
     private String mobileNumberField = "#mobile_number";
-    private String createAccountButton = "button[data-qa='create-account']";
+    private Locator createAccountButton;
 
-    public AccountInformationPage(Page page) { this.page = page; }
+    public AccountInformationPage(Page page) {
+        this.page = page;
+        headerText1 = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Enter Account Information"));
+        headerText2 = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Address Information"));
+        createAccountButton = page.getByTestId("create-account");
+    }
     /* Enter Account Information */
     public boolean isAccountInformationHeaderVisible() {
-        page.locator(headerText1).waitFor();
-        return page.locator(headerText1).isVisible();
+        headerText1.waitFor();
+        return headerText1.isVisible();
     }
     public void selectTitleMrs(){
         page.locator(titleMrs).click();
@@ -55,8 +62,8 @@ public class AccountInformationPage {
 
     /* Address Information */
     public boolean isAddressInformationHeader2Visible(){
-        page.locator(headerText2).waitFor();
-        return page.locator(headerText2).isVisible();
+        headerText2.waitFor();
+        return headerText2.isVisible();
     }
     public void fillFirstName(String firstName) {
         page.locator(firstNameField).fill(firstName);
@@ -89,7 +96,7 @@ public class AccountInformationPage {
         page.locator(mobileNumberField).fill(mobileNumber);
     }
     public void clickOnCreateAccount(){
-        page.locator(createAccountButton).click();
+        createAccountButton.click();
     }
 
     public void enterAccountInformation(String password, String day,String month, String year){

@@ -16,6 +16,7 @@ public class BaseTest {
     public void setup() {
 
        playwright = Playwright.create();
+       playwright.selectors().setTestIdAttribute("data-qa");
        browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
        context = browser.newContext();
        context.setDefaultTimeout(ConfigReader.getTimeout());

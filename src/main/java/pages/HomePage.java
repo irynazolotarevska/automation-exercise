@@ -2,19 +2,23 @@ package pages;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.options.AriaRole;
 import com.microsoft.playwright.options.WaitForSelectorState;
 
-public class HomePage {
+public class HomePage  {
 
     private Page page;
     public static final String STARTURL = "https://automationexercise.com/";
     private String logo = "img[alt='Website for automation practice']";
-    private String signupLoginButton = "a:has-text('Signup / Login')";
+    private Locator signupLoginButton;
     private String loggedInText = "Logged in as ";
     private String deleteAccountButton = "Delete Account";
+    private String productsButton = "a[href='/products']";
 
     public HomePage(Page page){
         this.page = page;
+        signupLoginButton = page.getByRole(AriaRole.LINK, new
+                Page.GetByRoleOptions().setName("Signup / Login"));
     }
 
     public void openHomePage() {
@@ -31,15 +35,23 @@ public class HomePage {
         page.locator(logo).waitFor();
         return page.locator(logo).isVisible();
     }
+
     public void clickSignupLogin(){
-        page.locator(signupLoginButton).waitFor(new Locator.WaitForOptions().setTimeout(5000));
-        page.locator(signupLoginButton).click();
+        signupLoginButton.waitFor(new Locator.WaitForOptions().setTimeout(5000));
+        signupLoginButton.click();
     }
+
     public boolean isLoggedInTextVisible(String username){
         page.getByText(loggedInText + username).waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.VISIBLE));
         return page.getByText(loggedInText + username).isVisible();
     }
+
     public void clickDeleteAccountButton(){
         page.getByText(deleteAccountButton).click();
     }
+
+    public void clickProductButton(){
+        page.locator(productsButton).click();
+    }
+
 }
