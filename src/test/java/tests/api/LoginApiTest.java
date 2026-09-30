@@ -45,5 +45,4 @@ public class LoginApiTest extends BaseApiTest {
         .then()
                 .body("responseCode", is(404));
     }
-
 }
