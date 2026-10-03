@@ -6,6 +6,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pages.HomePage;
 import pages.SignupLoginPage;
+import utils.ConfigReader;
 
 public class HomePageTest extends BaseTest{
     HomePage homePage;
@@ -30,7 +31,7 @@ public class HomePageTest extends BaseTest{
     @Test(groups = {"smoke"})
     public void verifyHomePageUrl(){
         homePage.openHomePage();
-        Assert.assertTrue(page.url().contains(HomePage.STARTURL));
+        Assert.assertTrue(page.url().contains(ConfigReader.getBaseUrl()));
         System.out.println("✓ Test passed!");
     }
 

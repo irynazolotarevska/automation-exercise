@@ -4,11 +4,11 @@ import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
 import com.microsoft.playwright.options.WaitForSelectorState;
+import utils.ConfigReader;
 
 public class HomePage  {
 
     private Page page;
-    public static final String STARTURL = "https://automationexercise.com/";
     private String logo = "img[alt='Website for automation practice']";
     private Locator signupLoginButton;
     private String loggedInText = "Logged in as ";
@@ -22,7 +22,7 @@ public class HomePage  {
     }
 
     public void openHomePage() {
-        page.navigate(STARTURL);
+        page.navigate(ConfigReader.getBaseUrl());
 
         /* consent popup - not always present, so don't wait for it */
         Locator consentPopup = page.locator("p.fc-button-label:text-is('Consent')");

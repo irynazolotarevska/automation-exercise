@@ -1,6 +1,4 @@
 package utils;
-
-
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
@@ -19,9 +17,16 @@ public class ConfigReader {
         }
     }
 
+    public static String getBaseUrl(){
+        return properties.getProperty("base.url");
+    }
 
-    public static int getTimeout(){
-        return Integer.parseInt(properties.getProperty("default.timeout"));
+    public static int getNavigationTimeout(){
+        return Integer.parseInt(properties.getProperty("navigation.timeout"));
+    }
+
+    public static int getActionTimeout(){
+        return Integer.parseInt(properties.getProperty("action.timeout"));
     }
 
     public static String getExistingUserEmail(){

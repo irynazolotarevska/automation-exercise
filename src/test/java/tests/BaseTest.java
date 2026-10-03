@@ -28,7 +28,8 @@ public class BaseTest {
        headless  = "true".equals(System.getenv("CI"));
        browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(headless));
        context = browser.newContext();
-       context.setDefaultTimeout(ConfigReader.getTimeout());
+       context.setDefaultTimeout(ConfigReader.getActionTimeout());
+       context.setDefaultNavigationTimeout(ConfigReader.getNavigationTimeout());
        page = context.newPage();
        System.out.println("Browser started successfully");
     }
