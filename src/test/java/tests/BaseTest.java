@@ -14,6 +14,7 @@ public class BaseTest {
     protected Browser browser;
     protected BrowserContext context;
     protected Page page;
+    boolean headless;
 
     public Page getPage() {
         return page;
@@ -24,7 +25,8 @@ public class BaseTest {
 
        playwright = Playwright.create();
        playwright.selectors().setTestIdAttribute("data-qa");
-       browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
+       headless  = "true".equals(System.getenv("CI"));
+       browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(headless));
        context = browser.newContext();
        context.setDefaultTimeout(ConfigReader.getTimeout());
        page = context.newPage();
