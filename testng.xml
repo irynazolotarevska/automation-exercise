@@ -10,6 +10,7 @@
             <class name="tests.HomePageTest"></class>
             <class name="tests.LoginTest"></class>
             <class name="tests.SignupTest"></class>
+            <class name="tests.ProductDetailTest"></class>
 
         </classes>
     </test>

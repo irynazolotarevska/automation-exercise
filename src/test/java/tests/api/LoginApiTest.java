@@ -12,7 +12,7 @@ public class LoginApiTest extends BaseApiTest {
     @DataProvider(name = "validLoginData")
     public Object[][] validLoginData() {
         return new Object[][] {
-                { ConfigReader.getExistingUserEmail(), "123456" }
+                { ConfigReader.getExistingUserEmail(), ConfigReader.getExistingUserPassword() }
         };
     }
 

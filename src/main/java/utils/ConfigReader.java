@@ -30,8 +30,19 @@ public class ConfigReader {
     }
 
     public static String getExistingUserEmail(){
-        return properties.getProperty("existing.user.email");
+        return getRequiredEnv("TEST_USER_EMAIL");
     }
 
+    public static String getExistingUserPassword(){
+        return getRequiredEnv("TEST_USER_PASSWORD");
+    }
+
+    private static String getRequiredEnv(String name){
+        String value = System.getenv(name);
+        if (value == null || value.isBlank()) {
+            throw new IllegalStateException("Environment variable " + name + " is not set");
+        }
+        return value;
+    }
 
 }
